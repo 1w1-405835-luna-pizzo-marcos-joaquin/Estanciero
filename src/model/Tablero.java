@@ -1,6 +1,4 @@
-package Src.Model;
-
-import Src.Model.IJugador;
+package src.model;
 
 public class Tablero implements IJugador{
     private int id_modo;

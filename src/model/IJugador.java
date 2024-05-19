@@ -1,4 +1,4 @@
-package Src.Model;
+package src.model;
 
 public interface IJugador {
 
