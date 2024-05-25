@@ -1,5 +1,6 @@
 package src.model;
 
+
 import src.services.IJugador;
 
 public class Tablero implements IJugador {
