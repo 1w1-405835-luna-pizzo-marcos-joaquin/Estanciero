@@ -1,4 +1,4 @@
-package src.model;
+package src.services;
 
 public interface IJugador {
 

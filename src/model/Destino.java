@@ -1,5 +1,7 @@
 package src.model;
 
+import src.services.ITarjeta;
+
 public class Destino implements ITarjeta {
 
     private String Descripcion;

@@ -1,6 +1,8 @@
 package src.model;
 
-public class Tablero implements IJugador{
+import src.services.IJugador;
+
+public class Tablero implements IJugador {
     private int id_modo;
 
     private int id_dificultad;
