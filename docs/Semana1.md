@@ -2,9 +2,9 @@
 
 ![tp-lab-lll](https://github.com/LCIII-2023/tpi-estanciero-2w1-g2/assets/142741266/36631b21-776d-4a51-9ae1-40bd65bb44e1)
 
-###  Clase Src.Tablero: 
+###  Clase src.Tablero: 
 
-> En la clase Src.Tablero se van a encontrar los jugadores, y se va a encargar de dar inicio a la partida, desarrollar el juego y darle fin. Estará relacionada con las clases Jugador, Modo de Juego y Dificultad y casilla.
+> En la clase src.Tablero se van a encontrar los jugadores, y se va a encargar de dar inicio a la partida, desarrollar el juego y darle fin. Estará relacionada con las clases Jugador, Modo de Juego y Dificultad y casilla.
 
 ### Clase Jugador: 
 

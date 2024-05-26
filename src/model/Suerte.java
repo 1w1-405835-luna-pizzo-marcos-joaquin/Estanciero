@@ -1,11 +1,13 @@
-package Src.Model;
+package src.model;
 
-public class Destino implements ITarjeta {
+import src.services.ITarjeta;
+
+public class Suerte implements ITarjeta {
+
 
     private String Descripcion;
     private int id_tipo;
-
-    public Destino(String descripcion, int id_tipo) {
+    public Suerte(String descripcion, int id_tipo) {
         Descripcion = descripcion;
         this.id_tipo = id_tipo;
     }
@@ -25,6 +27,7 @@ public class Destino implements ITarjeta {
     public void setId_tipo(int id_tipo) {
         this.id_tipo = id_tipo;
     }
+
 
     @Override
     public void Mezclar() {
