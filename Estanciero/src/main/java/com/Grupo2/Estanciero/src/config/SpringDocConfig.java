@@ -15,15 +15,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringDocConfig {
 
-    @Value("${app.url}") private String url;
-    @Value("${app.dev-name}")private String devName;
-    @Value("${app.dev-email}")private String devEmail;
+    @Value("${app.url}")
+    private String url;
+    @Value("${app.dev-name}")
+    private String devName;
+    @Value("${app.dev-email}")
+    private String devEmail;
 
     @Bean
-    public OpenAPI openApi (
+    public OpenAPI openApi(
             @Value("${app.name}") String appName,
             @Value("${app.desc}") String appDescription,
-            @Value("${app.version}") String appVersion){
+            @Value("${app.version}") String appVersion) {
 
         Info info = new Info()
                 .title(appName)

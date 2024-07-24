@@ -10,36 +10,30 @@ import org.springframework.context.ApplicationContext;
 
 
 @SpringBootApplication
-public class EstancieroApplication implements CommandLineRunner{
+public class EstancieroApplication implements CommandLineRunner {
 
-	@Autowired
-	private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-	public static void main(String[] args) {
-		SpringApplication.run(EstancieroApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(EstancieroApplication.class, args);
+    }
 
-	}
+    @Override
+    public void run(String... args) throws Exception {
 
-	@Override
-	public void run(String... args) throws Exception {
+        Tablero tablero = applicationContext.getBean(Tablero.class);
 
-		Tablero tablero = applicationContext.getBean(Tablero.class);
+        Letras l = new Letras();
+        boolean jugar;
 
-		Letras l = new Letras();
-		boolean jugar = true;
+        do {
+            l.welcome();
+            tablero.inciarPartida();
+            tablero.jugarRonda();
+            jugar = tablero.jugarDeNuevo();
 
-		do {
-			l.welcome();
+        } while (jugar);
 
-			tablero.inciarPartida();
-
-
-			tablero.jugarRonda();
-
-
-			jugar = tablero.jugarDeNuevo();
-
-		}while(jugar);
-
-	}
+    }
 }

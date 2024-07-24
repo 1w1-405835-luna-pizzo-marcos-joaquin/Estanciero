@@ -17,7 +17,7 @@ public class MappersConfig {
 
     @Bean("mergerMapper")
     public ModelMapper mergerMapper() {
-        ModelMapper mapper =  new ModelMapper();
+        ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration()
                 .setPropertyCondition(Conditions.isNotNull());
         return mapper;

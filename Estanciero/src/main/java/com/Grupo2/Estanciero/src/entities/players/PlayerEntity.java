@@ -16,10 +16,10 @@ public class PlayerEntity {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column( name = "id",  nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "match_id")
     private MatchEntity match;
 

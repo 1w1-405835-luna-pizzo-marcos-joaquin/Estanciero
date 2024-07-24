@@ -29,21 +29,21 @@ public class PlayerController {
 
 
     @GetMapping("/match/{id}")
-    public ResponseEntity<ArrayList<PlayerDto>> getPlayer(@PathVariable("id") Long id){
+    public ResponseEntity<ArrayList<PlayerDto>> getPlayer(@PathVariable("id") Long id) {
 
-         ArrayList<JugadorService> players = playerService.getPlayerByMatch(id);
-         ArrayList<PlayerDto> playersDto = new ArrayList<>();
+        ArrayList<JugadorService> players = playerService.getPlayerByMatch(id);
+        ArrayList<PlayerDto> playersDto = new ArrayList<>();
 
-         for(JugadorService j : players){
-             PlayerDto p = modelMapper.map(j, PlayerDto.class);
-             playersDto.add(p);
-         }
+        for (JugadorService j : players) {
+            PlayerDto p = modelMapper.map(j, PlayerDto.class);
+            playersDto.add(p);
+        }
 
         return ResponseEntity.ok(playersDto);
     }
 
     @DeleteMapping("/deleteAll")
-    public  void deleteAll(){
+    public void deleteAll() {
 
         playerService.deleteAll();
 
@@ -51,11 +51,11 @@ public class PlayerController {
 
 
     @GetMapping("getAll")
-    public ResponseEntity<ArrayList<PlayerDto>> gatPlayers(){
+    public ResponseEntity<ArrayList<PlayerDto>> gatPlayers() {
         ArrayList<Jugador> players = playerService.getAll();
         ArrayList<PlayerDto> playersDtos = new ArrayList<>();
 
-        for(Jugador j : players){
+        for (Jugador j : players) {
             PlayerDto playerDto = modelMapper.map(j, PlayerDto.class);
             playersDtos.add(playerDto);
         }

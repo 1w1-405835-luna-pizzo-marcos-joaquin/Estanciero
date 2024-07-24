@@ -23,7 +23,7 @@ public class MatchEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "match",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<PlayerEntity> players;
 
     @Enumerated(EnumType.STRING)

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public interface PlayerService {
 
     public ArrayList<JugadorService> getPlayerByMatch(Long id);
+
     public ArrayList<Jugador> getAll();
 
     void deleteAll();

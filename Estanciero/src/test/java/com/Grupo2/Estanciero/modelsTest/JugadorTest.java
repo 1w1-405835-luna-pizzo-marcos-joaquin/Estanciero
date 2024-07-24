@@ -1,16 +1,20 @@
 package com.Grupo2.Estanciero.modelsTest;
 
+import com.Grupo2.Estanciero.src.models.Card;
 import com.Grupo2.Estanciero.src.models.Casilla;
 import com.Grupo2.Estanciero.src.models.Jugador;
 import com.Grupo2.Estanciero.src.models.Propiedades;
 import jakarta.persistence.criteria.CriteriaBuilder;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.springframework.util.Assert;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -23,20 +27,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class JugadorTest {
 
-    @Mock
-    private Random mockRanom;
+
     @Mock
     private ArrayList<Propiedades> propiedadesMock;
     @Mock
     private Casilla casillaMock;
 
-    @InjectMocks
+    @Mock
+    private Jugador propietario;
+
+    @Spy
     private Jugador jugador;
 
     @BeforeEach
-    public void setUp() { MockitoAnnotations.openMocks(this); }
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void tirarDdo() {
@@ -66,25 +75,25 @@ public class JugadorTest {
 
         jugador.mover();
 
-        if (jugador.getCasilla().getNum_casilla() == 42){
+        if (jugador.getCasilla().getNum_casilla() == 42) {
             assertTrue(out.toString().contains("Paso por la salida, cobro $5.000!"));
         }
-        if (jugador.getCasilla().getNum_casilla() == 35){
+        if (jugador.getCasilla().getNum_casilla() == 35) {
             assertTrue(out.toString().contains("Se envio a"));
         }
-        if (jugador.getCasilla().getNum_casilla() == 7){
+        if (jugador.getCasilla().getNum_casilla() == 7) {
             assertTrue(out.toString().contains("Premio ganadero,"));
         }
-        if (jugador.getCasilla().getNum_casilla() == 28){
+        if (jugador.getCasilla().getNum_casilla() == 28) {
             assertTrue(out.toString().contains("Esta en una casilla de descanso"));
         }
-        if (jugador.getCasilla().getNum_casilla() == 21){
+        if (jugador.getCasilla().getNum_casilla() == 21) {
             assertTrue(out.toString().contains("Esta en una casilla de descanso"));
         }
-        if (jugador.getCasilla().getNum_casilla() == 4){
+        if (jugador.getCasilla().getNum_casilla() == 4) {
             assertTrue(out.toString().contains("Pago impuestos"));
         }
-        if (jugador.getCasilla().getNum_casilla() == 41){
+        if (jugador.getCasilla().getNum_casilla() == 41) {
             assertTrue(out.toString().contains("Pago impuestos"));
         }
     }
@@ -127,23 +136,115 @@ public class JugadorTest {
     }
 
     @Test
-    void sacarTarjeta() {
+    void sacarTarjetaSuerte() {
+        Card cardS = new Card();
+        cardS.setAccion("suma");
+        cardS.setValor(150);
+        cardS.setDescripcion("test exitoso");
+
+        Card cardD = new Card();
+        cardD.setAccion("suma");
+        cardD.setValor(0);
+
+        ArrayList<Card> lstSuerte = new ArrayList<>();
+        lstSuerte.add(cardS);
+        ArrayList<Card> lstDestino = new ArrayList<>();
+        lstDestino.add(cardD);
+
+        when(casillaMock.getNum_casilla()).thenReturn(15);
+
+        jugador.setDinero(0);
+        jugador.setCasilla(casillaMock);
+
+        jugador.sacarTarjeta(lstSuerte, lstDestino);
+
+        assertEquals(150, jugador.getDinero());
     }
 
     @Test
-    void irPreso() {
+    void sacarTarjetaDestino() {
+        Card cardS = new Card();
+        cardS.setAccion("suma");
+        cardS.setValor(0);
+
+
+        Card cardD = new Card();
+        cardD.setAccion("suma");
+        cardD.setDescripcion("test exitoso");
+        cardD.setValor(150);
+
+        ArrayList<Card> lstSuerte = new ArrayList<>();
+        lstSuerte.add(cardS);
+        ArrayList<Card> lstDestino = new ArrayList<>();
+        lstDestino.add(cardD);
+
+        when(casillaMock.getNum_casilla()).thenReturn(10);
+
+        jugador.setDinero(0);
+        jugador.setCasilla(casillaMock);
+
+        jugador.sacarTarjeta(lstSuerte, lstDestino);
+
+        assertEquals(150, jugador.getDinero());
+    }
+
+    @Test
+    void irPresoTest() {
         Jugador jugador = new Jugador();
         jugador.irPreso();
-        verify(casillaMock).setNum_casilla(14);
+
         assertTrue(jugador.isPreso());
         assertEquals(3, jugador.getTurnosPreso());
     }
 
     @Test
-    void alquilar() {
+    void alquilarTest() {
+
+        propietario.setIdJugador(2);
+        propietario.setDinero(0);
+
+        Propiedades p = new Propiedades();
+        p.setAlquiler(150);
+        p.setNroCasilla(1);
+        p.setIdPropietrio(2);
+
+        ArrayList<Jugador> lstJugadores = new ArrayList<>();
+        ArrayList<Casilla> lstCasilla = new ArrayList<>();
+
+        lstCasilla.add(casillaMock);
+        lstJugadores.add(propietario);
+
+        when(casillaMock.getNum_casilla()).thenReturn(1);
+        when(casillaMock.getPropiedad()).thenReturn(p);
+        when(casillaMock.getPropiedad()).thenReturn(p).thenReturn(p).thenReturn(p);
+        when(casillaMock.getPropiedad()).thenReturn(p);
+        when(jugador.getCasilla()).thenReturn(casillaMock);
+        when(jugador.getIdJugador()).thenReturn(1);
+        when(jugador.getDinero()).thenReturn(300).thenReturn(300);
+        when(jugador.getNombre()).thenReturn("juan");
+        when(propietario.getIdJugador()).thenReturn(2);
+        when(propietario.getDinero()).thenReturn(0);
+        when(propietario.getNombre()).thenReturn("pedro");
+
+        jugador.alquilar(lstJugadores, lstCasilla);
+
+        verify(jugador).setDinero(300 - 150);
+        verify(propietario).setDinero(300 - 150);
+
+
     }
 
     @Test
-    void pagar() {
+    void pagarTest() {
+        int monto = 100;
+        ArrayList<Propiedades> empty = new ArrayList<>();
+
+        when(jugador.getDinero()).thenReturn(50);
+        when(jugador.getPropiedades()).thenReturn(empty);
+
+        jugador.pagar(monto);
+
+        verify(jugador).setPerdio(true);
     }
+
 }

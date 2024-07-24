@@ -15,68 +15,88 @@ public interface JugadorService {
 
 
     public ArrayList<Integer> tirarDdo();
+
     public ArrayList<Integer> mover();
 
     public void comprar(Casilla casilla);
+
     public void vender();
+
     public void vender(Jugador jugador);
-    public void construir(ArrayList<Propiedades>pTablero);
-    public void construir(ArrayList<Propiedades>pTablero, ArrayList<Casilla> lista);
-    public Boolean construir(ArrayList<Propiedades>pTablero,Jugador jugador);
-    public void sacarTarjeta(ArrayList<Card>lstSuerte,ArrayList<Card>lstDestino);
+
+    public void construir(ArrayList<Propiedades> pTablero);
+
+    public void construir(ArrayList<Propiedades> pTablero, ArrayList<Casilla> lista);
+
+    public Boolean construir(ArrayList<Propiedades> pTablero, Jugador jugador);
+
+    public void sacarTarjeta(ArrayList<Card> lstSuerte, ArrayList<Card> lstDestino);
+
     public void irPreso();
+
     public int getIdJugador();
 
-    public void setIdJugador(int idJugador) ;
+    public void setIdJugador(int idJugador);
 
-    public String getNombre() ;
+    public String getNombre();
 
-    public void setNombre(String nombre) ;
+    public void setNombre(String nombre);
 
     public int getDinero();
 
-    public void setDinero(int dinero) ;
+    public void setDinero(int dinero);
 
-    public ArrayList<Propiedades> getPropiedades() ;
+    public ArrayList<Propiedades> getPropiedades();
 
-    public void setPropiedades(ArrayList<Propiedades> propiedades) ;
+    public void setPropiedades(ArrayList<Propiedades> propiedades);
 
-    public Casilla getCasilla() ;
+    public Casilla getCasilla();
 
-    public void setCasilla(Casilla casilla) ;
+    public void setCasilla(Casilla casilla);
 
-    public int getCapitalTotal() ;
+    public int getCapitalTotal();
 
-    public void setCapitalTotal(int capitalTotal) ;
-    public boolean isPreso() ;
+    public void setCapitalTotal(int capitalTotal);
 
-    public void setPreso(boolean preso) ;
+    public boolean isPreso();
+
+    public void setPreso(boolean preso);
 
     public int getTurnosPreso();
 
-    public void setTurnosPreso(int turnosPreso) ;
+    public void setTurnosPreso(int turnosPreso);
+
     public boolean getPerdio();
 
     public void setPerdio(boolean perdio);
+
     public boolean getGano();
 
     public void setGano(boolean gano);
+
     public Integer getNumeroDado();
 
-    public void setNumeroDado(Integer numeroDado) ;
-    public Integer getTurno() ;
+    public void setNumeroDado(Integer numeroDado);
 
-    public void setTurno(Integer turno) ;
-    public ArrayList<Integer> getDados() ;
+    public Integer getTurno();
 
-    public void setDados(ArrayList<Integer> dados) ;
-    public boolean getEsBot() ;
-    public int getNumTiros() ;
+    public void setTurno(Integer turno);
+
+    public ArrayList<Integer> getDados();
+
+    public void setDados(ArrayList<Integer> dados);
+
+    public boolean getEsBot();
+
+    public int getNumTiros();
 
     public void setNumTiros(int numTiros);
-    public void setEsBot(boolean esBot) ;
-    public boolean volverATirar(ArrayList<Integer>dados);
-    public void alquilar(ArrayList<Jugador>listaJugadores, ArrayList<Casilla>lstCasilla);
+
+    public void setEsBot(boolean esBot);
+
+    public boolean volverATirar(ArrayList<Integer> dados);
+
+    public void alquilar(ArrayList<Jugador> listaJugadores, ArrayList<Casilla> lstCasilla);
 
 
 }

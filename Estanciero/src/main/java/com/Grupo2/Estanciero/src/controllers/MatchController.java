@@ -24,7 +24,7 @@ public class MatchController {
 
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<MatchDto> getMatchById(@PathVariable("id") Long id){
+    public ResponseEntity<MatchDto> getMatchById(@PathVariable("id") Long id) {
 
         Match match = matchService.getMatchById(id);
         MatchDto matchDto = modelMapper.map(match, MatchDto.class);
@@ -33,7 +33,7 @@ public class MatchController {
     }
 
     @GetMapping(("/get/All"))
-    public ResponseEntity<MatchDto> getMatch(){
+    public ResponseEntity<MatchDto> getMatch() {
         Match match = matchService.getMatch();
 
         MatchDto matchDto = modelMapper.map(match, MatchDto.class);
@@ -42,14 +42,13 @@ public class MatchController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteMeatch(@PathVariable("id") Long id){
+    public void deleteMeatch(@PathVariable("id") Long id) {
         matchService.deleteMatch(id);
     }
 
 
-
     @PostMapping("/create")
-    public ResponseEntity<MatchDto>  createMatch(){
+    public ResponseEntity<MatchDto> createMatch() {
 
         ArrayList<JugadorService> j = new ArrayList<>();
 

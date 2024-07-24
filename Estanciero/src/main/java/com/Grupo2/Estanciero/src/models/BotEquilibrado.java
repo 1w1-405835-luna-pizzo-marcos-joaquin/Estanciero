@@ -9,7 +9,8 @@ import java.util.ArrayList;
 @Setter
 public class BotEquilibrado extends Jugador {
     private int contador;
-    private Validadores validador=new Validadores();
+    private Validadores validador = new Validadores();
+
     public BotEquilibrado() {
         super();
     }
@@ -22,14 +23,14 @@ public class BotEquilibrado extends Jugador {
     @Override
     public void comprar(Casilla casilla) {
 
-        if (casilla.getPropiedad()!=null){
+        if (casilla.getPropiedad() != null) {
             String provincia = casilla.getPropiedad().getProvincia().toLowerCase();
             //se valida que la casilla sea del tipo propiedad
             /**Se valida que tenga dinero y que no tenga propietario la casilla*/
             if (getDinero() >= casilla.getPropiedad().getPrecio() &&
                     casilla.getPropiedad().getIdPropietrio() == 0) {
                 /**Se valida que el nro de provincia coincida con el de preferencia*/
-                if (provincia.equals("mendoza")||provincia.equals("santa fe")||provincia.equals("tucuman")) {
+                if (provincia.equals("mendoza") || provincia.equals("santa fe") || provincia.equals("tucuman")) {
                     //Se setea un propietario a la casilla
                     casilla.getPropiedad().setIdPropietrio(getIdJugador());
                     //se resta al dinero total el valor de la compra
@@ -72,7 +73,7 @@ public class BotEquilibrado extends Jugador {
     //Construirá mejoras cuando el costo de la construcción no supere el 50% de su dinero en cuenta o
     // cuando se hayan vendido más del 75% de las propiedades.
     @Override
-    public void construir(ArrayList<Propiedades>pTablero, ArrayList<Casilla> lista) {
+    public void construir(ArrayList<Propiedades> pTablero, ArrayList<Casilla> lista) {
         int vendidas = 0;
         for (Casilla c : lista) {
             if (c.getPropiedad() != null) {
@@ -83,11 +84,11 @@ public class BotEquilibrado extends Jugador {
             }
         }
 
-        for (Propiedades prop:getPropiedades()){
+        for (Propiedades prop : getPropiedades()) {
             //21 respresenta el 75% del total de propiedades que se pueden vender (29)
             if (prop.getPrecioMejora() <= 0.5 * getDinero() || vendidas > 21) {
 
-                if (validador.seTienenTodasZonas(pTablero,getPropiedades(),prop)&&prop.getCantidadChacras()<4){
+                if (validador.seTienenTodasZonas(pTablero, getPropiedades(), prop) && prop.getCantidadChacras() < 4) {
                     prop.setCantidadChacras(prop.getCantidadChacras() + 1);
 
                     //Sacamos la suma de dinero de la cuenta
@@ -101,14 +102,13 @@ public class BotEquilibrado extends Jugador {
                     int incremento = prop.getAlquiler() * (1 / prop.getCantidadChacras());
                     prop.setAlquiler(prop.getAlquiler() + incremento);
 
-                    setCapitalTotal(getCapitalTotal() - prop.getPrecioMejora()/2);
+                    setCapitalTotal(getCapitalTotal() - prop.getPrecioMejora() / 2);
                     System.out.println(STR."El jugador \{getNombre()} Mejoro \{prop.getProvincia()} \{prop.getZona()}");
 
                 }
 
             }
         }
-
 
 
     }

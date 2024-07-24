@@ -11,9 +11,13 @@ import java.util.ArrayList;
 public interface MatchService {
 
     Match createMatch(ArrayList<JugadorService> players, int difficulty, int modo, int capitalParaGanar);
+
     Match getMatchById(Long id);
+
     Match getMatch();
+
     void deleteMatch(Long id);
+
     void updateMatch(Match match);
 
 

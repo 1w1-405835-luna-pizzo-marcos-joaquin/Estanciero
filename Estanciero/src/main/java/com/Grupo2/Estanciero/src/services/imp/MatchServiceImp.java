@@ -43,12 +43,15 @@ public class MatchServiceImp implements MatchService {
 
         String difficultyStr = "";
 
-        switch (difficultyInt){
-            case 1: difficultyStr = "easy";
+        switch (difficultyInt) {
+            case 1:
+                difficultyStr = "easy";
                 break;
-            case 2: difficultyStr = "medium";
+            case 2:
+                difficultyStr = "medium";
                 break;
-            case 3: difficultyStr = "hard";
+            case 3:
+                difficultyStr = "hard";
                 break;
         }
 
@@ -65,7 +68,7 @@ public class MatchServiceImp implements MatchService {
 
         List<PlayerEntity> playerEntities = new ArrayList<>();
 
-        for(JugadorService player : players){
+        for (JugadorService player : players) {
             PlayerEntity playerEntity = modelMapper.map(player, PlayerEntity.class);
             playerEntity.setMatch(matchEntity);
             playerEntities.add(playerEntity);
@@ -76,10 +79,10 @@ public class MatchServiceImp implements MatchService {
         MatchEntity matchSaved = matchRepository.save(matchEntity);
         ArrayList<Jugador> playerss = new ArrayList<>();
 
-        for(PlayerEntity p : playerEntities){
+        for (PlayerEntity p : playerEntities) {
             Jugador j = convert(p);
             long idLong = p.getId();
-            int id = (int)idLong;
+            int id = (int) idLong;
             j.setIdJugador(id);
             playerss.add(j);
         }
@@ -91,7 +94,7 @@ public class MatchServiceImp implements MatchService {
 
     }
 
-   @Transactional
+    @Transactional
     @Override
     public Match getMatchById(Long id) {
 
@@ -102,22 +105,23 @@ public class MatchServiceImp implements MatchService {
             return modelMapper.map(matchEntityOptional.get(), Match.class);
         }
     }
+
     @Transactional
     @Override
-    public Match getMatch(){
+    public Match getMatch() {
 
-        MatchEntity matchEntity =  matchRepository.findAll().stream()
+        MatchEntity matchEntity = matchRepository.findAll().stream()
                 .findFirst().orElse(null);
 
         Match match = new Match();
-        if(matchEntity != null){
+        if (matchEntity != null) {
 
             ArrayList<Jugador> players = new ArrayList<>();
 
-            for(PlayerEntity playerEntity : matchEntity.getPlayers()){
+            for (PlayerEntity playerEntity : matchEntity.getPlayers()) {
                 Jugador player = convert(playerEntity);
                 long idLong = playerEntity.getId();
-                int id = (int)idLong;
+                int id = (int) idLong;
                 player.setIdJugador(id);
                 players.add(player);
             }
@@ -132,32 +136,37 @@ public class MatchServiceImp implements MatchService {
 
     }
 
-    Jugador convert(PlayerEntity p){
+    Jugador convert(PlayerEntity p) {
 
         String type = p.getTipo();
         Jugador player = null;
 
-        switch(type){
+        switch (type) {
 
-            case "user": player = modelMapper.map(p, Player.class);
+            case "user":
+                player = modelMapper.map(p, Player.class);
                 player.setIdJugador(1);
 
                 break;
 
-            case "conservador": player = modelMapper.map(p, BotConservador.class);
+            case "conservador":
+                player = modelMapper.map(p, BotConservador.class);
                 player.setIdJugador(2);
                 break;
 
-            case "equilibrado": player = modelMapper.map(p, BotEquilibrado.class);
+            case "equilibrado":
+                player = modelMapper.map(p, BotEquilibrado.class);
                 player.setIdJugador(3);
 
                 break;
 
-            case "equilibrado2": player = modelMapper.map(p, BotEquilibrado.class);
+            case "equilibrado2":
+                player = modelMapper.map(p, BotEquilibrado.class);
                 player.setIdJugador(5);
                 break;
 
-            case "agresivo": player = modelMapper.map(p, BotAgresivo.class);
+            case "agresivo":
+                player = modelMapper.map(p, BotAgresivo.class);
                 player.setIdJugador(4);
                 break;
         }

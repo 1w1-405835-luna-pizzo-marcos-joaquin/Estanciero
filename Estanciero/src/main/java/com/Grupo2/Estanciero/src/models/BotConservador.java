@@ -9,8 +9,9 @@ import java.util.ArrayList;
 @Getter
 @Setter
 public class BotConservador extends Jugador {
-   private  int contador;
-    private Validadores validador=new Validadores();
+    private int contador;
+    private Validadores validador = new Validadores();
+
     public BotConservador() {
         super();
         contador = 0;
@@ -37,45 +38,45 @@ public class BotConservador extends Jugador {
 
         String provincia = casilla.getPropiedad().getProvincia().toLowerCase();
 
-            /**Se valida que tenga dinero y que no tenga propietario la casilla*/
-            if (getDinero() >= casilla.getPropiedad().getPrecio() &&
-                    casilla.getPropiedad().getIdPropietrio() == 0) {
-                /**Se valida que el nro de provincia coincida con el de preferencia*/
-                if (provincia.equals("formosa")||provincia.equals("rio negro")||provincia.equals("salta")) {
-                    //Se setea un propietario a la casilla
-                    casilla.getPropiedad().setIdPropietrio(getIdJugador());
-                    //se resta al dinero total el valor de la compra
-                    setDinero(getDinero() - casilla.getPropiedad().getPrecio());
-                    //se setea el valor del capital total
-                    setCapitalTotal(getCapitalTotal() + casilla.getPropiedad().getPrecioVenta());
-                    setContador(getContador() + 1);
-                    getPropiedades().add(casilla.getPropiedad());
-                    System.out.println(STR."El bot conservador compro la zona:\{casilla.getPropiedad().getZona()} de la provincia \{casilla.getPropiedad().getProvincia()}");
+        /**Se valida que tenga dinero y que no tenga propietario la casilla*/
+        if (getDinero() >= casilla.getPropiedad().getPrecio() &&
+                casilla.getPropiedad().getIdPropietrio() == 0) {
+            /**Se valida que el nro de provincia coincida con el de preferencia*/
+            if (provincia.equals("formosa") || provincia.equals("rio negro") || provincia.equals("salta")) {
+                //Se setea un propietario a la casilla
+                casilla.getPropiedad().setIdPropietrio(getIdJugador());
+                //se resta al dinero total el valor de la compra
+                setDinero(getDinero() - casilla.getPropiedad().getPrecio());
+                //se setea el valor del capital total
+                setCapitalTotal(getCapitalTotal() + casilla.getPropiedad().getPrecioVenta());
+                setContador(getContador() + 1);
+                getPropiedades().add(casilla.getPropiedad());
+                System.out.println(STR."El bot conservador compro la zona:\{casilla.getPropiedad().getZona()} de la provincia \{casilla.getPropiedad().getProvincia()}");
 
-                } else if (getContador() == 4) {
-                    //Se setea un propietario a la casilla
-                    casilla.getPropiedad().setIdPropietrio(getIdJugador());
-                    //se resta al dinero total el valor de la compra
-                    setDinero(getDinero() - casilla.getPropiedad().getPrecio());
-                    //se setea el valor del capital total
-                    setCapitalTotal(getCapitalTotal() + casilla.getPropiedad().getPrecioVenta());
-                    getPropiedades().add(casilla.getPropiedad());
-                    System.out.println(STR."El bot conservador compro la zona:\{casilla.getPropiedad().getZona()} de la provincia \{casilla.getPropiedad().getProvincia()}");
-                    setContador(0);
-                }
+            } else if (getContador() == 4) {
+                //Se setea un propietario a la casilla
+                casilla.getPropiedad().setIdPropietrio(getIdJugador());
+                //se resta al dinero total el valor de la compra
+                setDinero(getDinero() - casilla.getPropiedad().getPrecio());
+                //se setea el valor del capital total
+                setCapitalTotal(getCapitalTotal() + casilla.getPropiedad().getPrecioVenta());
+                getPropiedades().add(casilla.getPropiedad());
+                System.out.println(STR."El bot conservador compro la zona:\{casilla.getPropiedad().getZona()} de la provincia \{casilla.getPropiedad().getProvincia()}");
+                setContador(0);
             }
+        }
 
 
     }
 
     //Construirá mejoras solo cuando el costo de la construcción no sobrepase el 30% de su dinero en cuenta.
     @Override
-    public void construir(ArrayList<Propiedades> pTablero, ArrayList<Casilla> lista){
+    public void construir(ArrayList<Propiedades> pTablero, ArrayList<Casilla> lista) {
 
-        for (Propiedades prop:getPropiedades()) {
+        for (Propiedades prop : getPropiedades()) {
 
             if (prop.getPrecioMejora() < 0.3 * getDinero()) {
-                if (validador.seTienenTodasZonas(pTablero,getPropiedades(),prop)&&prop.getCantidadChacras()<4){
+                if (validador.seTienenTodasZonas(pTablero, getPropiedades(), prop) && prop.getCantidadChacras() < 4) {
                     prop.setCantidadChacras(prop.getCantidadChacras() + 1);
 
                     //Sacamos la suma de dinero de la cuenta
@@ -89,7 +90,7 @@ public class BotConservador extends Jugador {
                     int incremento = prop.getAlquiler() * (1 / prop.getCantidadChacras());
                     prop.setAlquiler(prop.getAlquiler() + incremento);
 
-                    setCapitalTotal(getCapitalTotal() - prop.getPrecioMejora()/2);
+                    setCapitalTotal(getCapitalTotal() - prop.getPrecioMejora() / 2);
                     System.out.println(STR."El jugador \{getNombre()} Mejoro \{prop.getProvincia()} \{prop.getZona()}");
                 }
             }

@@ -53,7 +53,7 @@ public class Tablero {
 
     public void jugarRonda() {
         do {
-         //   precioConChacra();
+            //   precioConChacra();
             for (Jugador jugador : match.getPlayers()) {
 
                 if (jugador.getNombre() == usuario.getNombre()) {
@@ -62,21 +62,21 @@ public class Tablero {
                     ArrayList<Integer> dadosTirados;
 
                     do {
-                        System.out.println(ANSI_CYAN+"=========================================================================================================="+ANSI_RESET);
+                        System.out.println(ANSI_CYAN + "==========================================================================================================" + ANSI_RESET);
 
                         System.out.println(STR."Es tu turno \{usuario.getNombre()}");
 
                         dadosTirados = jugador.mover();
 
-                        jugador.sacarTarjeta(listaSuerte,listaDestino);
+                        jugador.sacarTarjeta(listaSuerte, listaDestino);
 
-                        jugador.alquilar(match.getPlayers(),listaCasillas);
+                        jugador.alquilar(match.getPlayers(), listaCasillas);
 
-                        letras.mostrarCasillaActual(listaCasillas,jugador);
+                        letras.mostrarCasillaActual(listaCasillas, jugador);
 
                         do {
                             letras.mostrarTurnoJugador(jugador);
-                            letras.mostrarMenu(listaCasillas,jugador);
+                            letras.mostrarMenu(listaCasillas, jugador);
                             try {
                                 seleccion = scanner.nextInt();
                             } catch (InputMismatchException e) {
@@ -90,12 +90,12 @@ public class Tablero {
                                     // es la casilla en la que se encuentra el jugador
                                     for (Casilla c : listaCasillas) {
                                         //comprar la casilla en la que se encuentra
-                                        if (c.getPropiedad()!=null&& c.getNum_casilla() == jugador.getCasilla().getNum_casilla()) {
+                                        if (c.getPropiedad() != null && c.getNum_casilla() == jugador.getCasilla().getNum_casilla()) {
 
                                             jugador.comprar(c);
 
                                             long idProperty = c.getPropiedad().getIdPropiedad();
-                                                propertyService.updateProperties(idProperty, jugador.getIdJugador());
+                                            propertyService.updateProperties(idProperty, jugador.getIdJugador());
 
                                         }
                                     }
@@ -105,40 +105,41 @@ public class Tablero {
                                     break;
                                 //Valor
                                 case 3:
-                                    letras.mostrarEstadoBots(match.getPlayers(),jugador);
+                                    letras.mostrarEstadoBots(match.getPlayers(), jugador);
                                     break;
-                                case 4:break;
+                                case 4:
+                                    break;
 
 
                                 case 5:
                                     System.out.println("Esta seguro que quiere abandonar?(Y/n)");
                                     scanner.nextLine();
-                                    String respuesta=scanner.nextLine();
-                                    if (validador.getYesNoAnswer(respuesta)){
+                                    String respuesta = scanner.nextLine();
+                                    if (validador.getYesNoAnswer(respuesta)) {
                                         System.exit(0);
-                                }
+                                    }
 
                                 default:
                                     letras.println("Opción no valida.");
                             }
                         } while (seleccion != 4);
-                        System.out.println(ANSI_CYAN+"=========================================================================================================="+ANSI_RESET);
+                        System.out.println(ANSI_CYAN + "==========================================================================================================" + ANSI_RESET);
 
                     } while (jugador.volverATirar(dadosTirados));
 
                 } else {
-                    if (!jugador.getPerdio()){
+                    if (!jugador.getPerdio()) {
                         ArrayList<Integer> dadosTirados;
                         do {
-                            System.out.println(ANSI_YELLOW+"=========================================================================================================="+ANSI_RESET);
+                            System.out.println(ANSI_YELLOW + "==========================================================================================================" + ANSI_RESET);
                             letras.println("es el turno de " + jugador.getNombre());
-                            dadosTirados= jugador.mover();
+                            dadosTirados = jugador.mover();
                             jugador.sacarTarjeta(listaSuerte, listaDestino);
                             jugador.alquilar(match.getPlayers(), listaCasillas);
 
                             for (Casilla c : listaCasillas) {
                                 //comprar la casilla en la que se encuentra
-                                if (c.getPropiedad()!=null&& c.getNum_casilla() == jugador.getCasilla().getNum_casilla()) {
+                                if (c.getPropiedad() != null && c.getNum_casilla() == jugador.getCasilla().getNum_casilla()) {
 
                                     jugador.comprar(c);
 
@@ -148,17 +149,17 @@ public class Tablero {
                                 }
                             }
                             jugador.construir(propertyService.getAllproperties());
-                            System.out.println(ANSI_YELLOW+"=========================================================================================================="+ANSI_RESET);
+                            System.out.println(ANSI_YELLOW + "==========================================================================================================" + ANSI_RESET);
 
                             // TODO no se si aca se tiene que actualizar las property service
-                        }while (jugador.volverATirar(dadosTirados));
+                        } while (jugador.volverATirar(dadosTirados));
                     }
 
                 }
-                for(Casilla c :listaCasillas){
-                    if(c.getPropiedad() != null){
+                for (Casilla c : listaCasillas) {
+                    if (c.getPropiedad() != null) {
                         long id = c.getPropiedad().getIdPropiedad();
-                        propertyService.updatePropertiesChacras(id , c.getPropiedad().getCantidadChacras());
+                        propertyService.updatePropertiesChacras(id, c.getPropiedad().getCantidadChacras());
                     }
                 }
                 matchService.updateMatch(match);
@@ -180,11 +181,11 @@ public class Tablero {
             // Letras.println(STR."Propiedades: \{usuario.getPropiedades().toString()}");//mostrar propieedades
             //mostrar todas las propiedades que tiene el jugador con su numero de casilla
 
-            Jugador jugador=new Jugador();
-            for(Jugador player : match.getPlayers()){
-                if(player.getTipo().equals("user")){
+            Jugador jugador = new Jugador();
+            for (Jugador player : match.getPlayers()) {
+                if (player.getTipo().equals("user")) {
                     letras.mostrarPropiedades(player);
-                    jugador=player;
+                    jugador = player;
                 }
             }
 
@@ -205,8 +206,8 @@ public class Tablero {
                     usuario.vender(jugador);
                     break;
                 case 2:
-                    if(usuario.construir(propertyService.getAllproperties(),jugador)){
-                      precioConChacra();
+                    if (usuario.construir(propertyService.getAllproperties(), jugador)) {
+                        precioConChacra();
                     }
 
                     break;
@@ -254,10 +255,9 @@ public class Tablero {
         int cantidadJugadores = match.getPlayers().size();
         int perdieron = 0;
         for (Jugador jugador : match.getPlayers()) {
-            if(jugador.getTipo().equals("user") && jugador.getPerdio()){
+            if (jugador.getTipo().equals("user") && jugador.getPerdio()) {
                 return true;
-            }
-            else if (jugador.getPerdio()) {
+            } else if (jugador.getPerdio()) {
                 perdieron++;
             }
         }
@@ -276,7 +276,7 @@ public class Tablero {
         for (Jugador jugador : match.getPlayers()) {
             if (jugador.getCapitalTotal() >= match.getMontoGanador() || muerteSubita()) {
                 jugador.setGano(true);
-               return true;
+                return true;
             }
         }
         return termino;
@@ -332,7 +332,7 @@ public class Tablero {
 
         matchService.createMatch(listaJugadores, dificultad, id_modo, capitalParaGanar);
 
-        match=matchService.getMatch();
+        match = matchService.getMatch();
 
     }
 
@@ -351,37 +351,37 @@ public class Tablero {
     public void crearCasillas() {
         ArrayList<Propiedades> propiedades = propertyService.getAllproperties();
         listaCasillas.clear();
-        int nroPropiedad=0;
+        int nroPropiedad = 0;
 
 
-            for (int i = 0; i < 42; i++) {
+        for (int i = 0; i < 42; i++) {
 
-                Propiedades p=propiedades.get(nroPropiedad);
-                Casilla casilla = new Casilla();
-                casilla.setNum_casilla(i);
+            Propiedades p = propiedades.get(nroPropiedad);
+            Casilla casilla = new Casilla();
+            casilla.setNum_casilla(i);
 
-                if (p.getNroCasilla()==i) {
-                    casilla.setPropiedad(p);
-                    listaCasillas.add(casilla);
-                    if (nroPropiedad<28){
-                        nroPropiedad++;
-                    }
+            if (p.getNroCasilla() == i) {
+                casilla.setPropiedad(p);
+                listaCasillas.add(casilla);
+                if (nroPropiedad < 28) {
+                    nroPropiedad++;
                 }
-                else {listaCasillas.add(casilla);}
+            } else {
+                listaCasillas.add(casilla);
             }
+        }
 
     }
 
 
-    public void crearCard(){
+    public void crearCard() {
 
         ArrayList<Card> cards = cardService.getAll();
 
-        for(Card c : cards){
-            if(c.getTipo().equals("suerte")){
+        for (Card c : cards) {
+            if (c.getTipo().equals("suerte")) {
                 listaSuerte.add(c);
-            }
-            else {
+            } else {
                 listaDestino.add(c);
             }
         }
@@ -390,19 +390,19 @@ public class Tablero {
     }
 
 
-    public void asignarProperties(){
-        for(Casilla c : listaCasillas){
-            for(Jugador j : match.getPlayers()){
-                if(c.getPropiedad()!=null&& c.getPropiedad().getIdPropietrio() == j.getIdJugador()){
+    public void asignarProperties() {
+        for (Casilla c : listaCasillas) {
+            for (Jugador j : match.getPlayers()) {
+                if (c.getPropiedad() != null && c.getPropiedad().getIdPropietrio() == j.getIdJugador()) {
                     j.getPropiedades().add(c.getPropiedad());
                 }
             }
         }
     }
 
-    public void resetProperties(){
-        for(Casilla c : listaCasillas){
-            if (c.getPropiedad()!=null) {
+    public void resetProperties() {
+        for (Casilla c : listaCasillas) {
+            if (c.getPropiedad() != null) {
                 Propiedades p = c.getPropiedad();
                 long id = p.getIdPropiedad();
                 propertyService.updateProperties(id, 0);
@@ -411,9 +411,9 @@ public class Tablero {
         }
     }
 
-    public void precioConChacra(){
-        for(Casilla c : listaCasillas){
-            if(c.getPropiedad() != null && c.getPropiedad().getCantidadChacras() > 0){
+    public void precioConChacra() {
+        for (Casilla c : listaCasillas) {
+            if (c.getPropiedad() != null && c.getPropiedad().getCantidadChacras() > 0) {
 
                 c.getPropiedad().setPrecioVenta(c.getPropiedad().getPrecioVenta() + (c.getPropiedad().getPrecioMejora() / 2));
 

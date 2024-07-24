@@ -9,9 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class TableroTest {
 
     @Mock
@@ -147,7 +149,7 @@ class TableroTest {
             propiedad.setNroCasilla(i);
             propiedades.add(propiedad);
         }
-        
+
 
         // Configurar el mock para devolver las propiedades de prueba
         when(propertyService.getAllproperties()).thenReturn((ArrayList<Propiedades>) propiedades);

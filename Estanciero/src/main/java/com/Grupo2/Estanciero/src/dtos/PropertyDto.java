@@ -18,8 +18,6 @@ public class PropertyDto {
     private String zona;
 
 
-
-
 //    INSERT INTO properties (player_id, nroCasilla, precio, cantidadChacras, alquiler, provincia, zona) VALUES (0 , 1, 1400, 0, 200, 'Mendoza', 'Sur');
 //    INSERT INTO properties (player_id, nroCasilla, precio, cantidadChacras, alquiler, provincia, zona) VALUES (0, 2, 1400, 0, 300, 'Mendoza', 'Norte');
 //    INSERT INTO properties (player_id, nroCasilla, precio, cantidadChacras, alquiler, provincia, zona) VALUES (0, 3, 1400, 0, 150, 'Mendoza', 'Centro');

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Letras {
-    public  void println(String texto) {
+    public void println(String texto) {
         try {
             for (int i = 0; i < texto.length(); i++) {
                 System.out.print(texto.charAt(i));
@@ -85,13 +85,13 @@ public class Letras {
     //----------------------------------------------------------------------------------
 
 
-    public void mostrarPropiedades(ArrayList<Propiedades> propiedades){
-        for(Propiedades prop:propiedades){
-            if (prop.getNroCasilla()!=8&&prop.getNroCasilla()!=12&&prop.getNroCasilla()!=16
-                 &&prop.getNroCasilla()!=18&&prop.getNroCasilla()!=22&&prop.getNroCasilla()!=27&&prop.getNroCasilla()!=31){
+    public void mostrarPropiedades(ArrayList<Propiedades> propiedades) {
+        for (Propiedades prop : propiedades) {
+            if (prop.getNroCasilla() != 8 && prop.getNroCasilla() != 12 && prop.getNroCasilla() != 16
+                    && prop.getNroCasilla() != 18 && prop.getNroCasilla() != 22 && prop.getNroCasilla() != 27 && prop.getNroCasilla() != 31) {
 
                 System.out.println(STR."\{prop.getNroCasilla()}- \{prop.getProvincia()} \{prop.getZona()}"
-                        +"| Precio: $"+prop.getPrecioVenta()+"| Precio de construccion: $"+prop.getPrecioMejora());
+                        + "| Precio: $" + prop.getPrecioVenta() + "| Precio de construccion: $" + prop.getPrecioMejora());
 
             }
         }
@@ -104,7 +104,8 @@ public class Letras {
         System.out.println("                                      │___  |__    │   │____│ │  / │ │	   │ │___ │___│ │   │ ");
         System.out.println("                                      |___  ___|   │   │    │ │ /  │ |___  │ |___ |  |  |___|  ");
     }
-    public void dibujarDado(ArrayList<Integer>dados) {
+
+    public void dibujarDado(ArrayList<Integer> dados) {
         String[][] dado1 = obtenerDibujo(dados.get(0));
         String[][] dado2 = obtenerDibujo(dados.get(1));
 
@@ -117,7 +118,7 @@ public class Letras {
         switch (value) {
             case 1:
                 return new String[][]{
-                        {"┌─────────┐" },
+                        {"┌─────────┐"},
                         {"│         │"},
                         {"│    ●    │"},
                         {"│         │"},
@@ -200,7 +201,8 @@ public class Letras {
                         case 36:
                             System.out.println(STR."Avanzaste a la casilla \{c.getNum_casilla()} | 'Suerte'");
                             break;
-                        case 14:System.out.println(STR."Avanzaste a la casilla \{c.getNum_casilla()} | 'Carcel'");
+                        case 14:
+                            System.out.println(STR."Avanzaste a la casilla \{c.getNum_casilla()} | 'Carcel'");
                             break;
                         default:
                             System.out.println(STR."Avanzaste a la casilla \{c.getNum_casilla()}");
@@ -211,55 +213,51 @@ public class Letras {
         }
     }
 
-    public void mostrarTurnoJugador(Jugador jugador){
+    public void mostrarTurnoJugador(Jugador jugador) {
         System.out.println("--------------------------------------------------------------------------------------------------");
         println(STR."Es tu turno \{jugador.getNombre()}. Dinero disponible:  $\{jugador.getDinero()} | Capital total:$\{jugador.getCapitalTotal()}");
         System.out.println("--------------------------------------------------------------------------------------------------");
 
     }
 
-    public void mostrarMenu(ArrayList<Casilla>lstCasillas,Jugador jugador) {
-        for (Casilla c:lstCasillas){
+    public void mostrarMenu(ArrayList<Casilla> lstCasillas, Jugador jugador) {
+        for (Casilla c : lstCasillas) {
             if (c.getNum_casilla() == jugador.getCasilla().getNum_casilla()) {
-                if (c.getPropiedad()!=null && c.getPropiedad().getIdPropietrio()==0)
-                {
+                if (c.getPropiedad() != null && c.getPropiedad().getIdPropietrio() == 0) {
                     System.out.println("\n--------------------------------------------------------------------------------------------------");
                     println("1 - Comprar esta casilla \n" +
                             "2 - Ver Propiedades y sus opciones \n" +
                             "3 - Ver estado de los bots  \n" +
-                            "4 - Terminar turno \n"+
+                            "4 - Terminar turno \n" +
                             "5 - Abandonar partida");
                     System.out.println("--------------------------------------------------------------------------------------------------");
-                }
-                else if(c.getPropiedad()!=null&&c.getPropiedad().getIdPropietrio()== jugador.getIdJugador()) {
+                } else if (c.getPropiedad() != null && c.getPropiedad().getIdPropietrio() == jugador.getIdJugador()) {
                     System.out.println("\n--------------------------------------------------------------------------------------------------");
 
                     println("1 - Opcion no valida, ya compraste esta casilla \n" +
                             "2 - Ver Propiedades y sus opciones \n" +
                             "3 - Ver estado de los bots  \n" +
-                            "4 - Terminar turno \n"+
+                            "4 - Terminar turno \n" +
                             "5 - Abandonar partida");
                     System.out.println("--------------------------------------------------------------------------------------------------");
 
-                }
-                else if(c.getPropiedad()==null ) {
+                } else if (c.getPropiedad() == null) {
                     System.out.println("\n--------------------------------------------------------------------------------------------------");
 
                     println("1 - Opcion no valida, no se puede comprar esta casilla \n" +
                             "2 - Ver Propiedades y sus opciones \n" +
                             "3 - Ver estado de los bots  \n" +
-                            "4 - Terminar turno \n"+
+                            "4 - Terminar turno \n" +
                             "5 - Abandonar partida");
                     System.out.println("--------------------------------------------------------------------------------------------------");
 
-                }
-                else  {
+                } else {
                     System.out.println("\n--------------------------------------------------------------------------------------------------");
 
                     println("1 - Opcion no valida, esta casilla ya pertenece a otro jugador \n" +
                             "2 - Ver Propiedades y sus opciones \n" +
                             "3 - Ver Estado de los bots  \n" +
-                            "4 - Terminar turno \n"+
+                            "4 - Terminar turno \n" +
                             "5 - Abandonar partida");
                     System.out.println("--------------------------------------------------------------------------------------------------");
 
@@ -269,7 +267,7 @@ public class Letras {
         }
     }
 
-    public void irPreso(){
+    public void irPreso() {
         System.out.println("  Eres un criminal, te mandaron a la carcel.");
         System.out.println("░░░███████████████████████████████████████░░░");
         System.out.println("░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░");
@@ -298,26 +296,25 @@ public class Letras {
         System.out.println("░░░░░░░░░███████████████████████████░░░░░░░░░");
     }
 
-    public void mostrarEstadoBots(ArrayList<Jugador>lstJugadores,Jugador usuario){
-        for (Jugador j:lstJugadores){
-            if (j!=usuario){
+    public void mostrarEstadoBots(ArrayList<Jugador> lstJugadores, Jugador usuario) {
+        for (Jugador j : lstJugadores) {
+            if (j != usuario) {
                 System.out.println("--------------------------------------------------------------------------------------------------");
-                System.out.println(j.getNombre()+"----| Dinero actual ->$"+j.getDinero()+" |--| Capital total ->$"+j.getCapitalTotal());
+                System.out.println(j.getNombre() + "----| Dinero actual ->$" + j.getDinero() + " |--| Capital total ->$" + j.getCapitalTotal());
                 System.out.println("Propiedades:");
-                for (Propiedades p:j.getPropiedades()){
-                    System.out.println(p.getProvincia()+" "+p.getZona());
+                for (Propiedades p : j.getPropiedades()) {
+                    System.out.println(p.getProvincia() + " " + p.getZona());
                 }
                 System.out.println("--------------------------------------------------------------------------------------------------");
             }
         }
     }
 
-    public void mensajeFinal(ArrayList<Jugador>lstJugadores){
-        for (Jugador j:lstJugadores){
-            if (j.getGano()){
+    public void mensajeFinal(ArrayList<Jugador> lstJugadores) {
+        for (Jugador j : lstJugadores) {
+            if (j.getGano()) {
                 System.out.println(STR."El jugador ganador es \{j.getNombre()}! El dinero total acumulado fue de $\{j.getCapitalTotal()}");
-            }
-            else {
+            } else {
                 System.out.println(STR."El jugador \{j.getNombre()} no logro ganar esta vez. Su dinero total fue de $\{j.getCapitalTotal()}");
             }
         }

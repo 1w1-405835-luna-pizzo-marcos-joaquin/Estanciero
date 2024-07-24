@@ -24,12 +24,12 @@ public class PropertyController {
     private PropertyService propertyService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<ArrayList<PropertyDto>> getProperties(){
+    public ResponseEntity<ArrayList<PropertyDto>> getProperties() {
 
         ArrayList<PropertyDto> propertiesDto = new ArrayList<>();
         ArrayList<Propiedades> properties = propertyService.getAllproperties();
 
-        for(Propiedades p : properties){
+        for (Propiedades p : properties) {
             PropertyDto propertyDto = modelMapper.map(p, PropertyDto.class);
             propertiesDto.add(propertyDto);
         }
@@ -38,7 +38,7 @@ public class PropertyController {
     }
 
     @DeleteMapping("/deleteAll")
-    public void delete(){
+    public void delete() {
         propertyService.deleteAll();
     }
 

@@ -32,10 +32,10 @@ public class ProperyServiceImp implements PropertyService {
         List<PropertyEntity> propertiesEntity = propertyRepository.findAll();
         ArrayList<Propiedades> properties = new ArrayList<>();
 
-        for(PropertyEntity p : propertiesEntity){
+        for (PropertyEntity p : propertiesEntity) {
             Propiedades property = modelMapper.map(p, Propiedades.class);
             long id = p.getId();
-            int Id = (int)id;
+            int Id = (int) id;
             property.setIdPropiedad(Id);
             property.setIdPropietrio(p.getIdPropietario());
             properties.add(property);
@@ -44,14 +44,14 @@ public class ProperyServiceImp implements PropertyService {
     }
 
     @Override
-    public void deleteAll(){
+    public void deleteAll() {
         propertyRepository.deleteAll();
     }
 
 
     @Transactional
     @Override
-    public void updateProperties(Long propertyId, int playerId){
+    public void updateProperties(Long propertyId, int playerId) {
 
         Optional<PropertyEntity> propertyOptional = propertyRepository.findById(propertyId);
         if (propertyOptional.isPresent()) {
@@ -66,6 +66,7 @@ public class ProperyServiceImp implements PropertyService {
 
 
     }
+
     @Transactional
     @Override
     public void updatePropertiesChacras(Long propertyId, int chacras) {

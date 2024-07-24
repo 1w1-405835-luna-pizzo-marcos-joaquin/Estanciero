@@ -28,7 +28,7 @@ public class CardServiceImp implements CardService {
 
         ArrayList<Card> cards = new ArrayList<>();
 
-        for(CardEntity c : cardsEntity){
+        for (CardEntity c : cardsEntity) {
             Card card = modelMapper.map(c, Card.class);
             cards.add(card);
         }
